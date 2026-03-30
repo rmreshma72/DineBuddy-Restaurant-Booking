@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 text-center">
+
+```
+<div class="card shadow p-5">
+
+    <h2 class="text-success mb-3">🎉 Booking Confirmed!</h2>
+
+    <p>Your table has been successfully booked.</p>
+
+    <p class="text-muted">We look forward to serving you. Enjoy your dining! 🍽️</p>
+
+    <div class="mt-4">
+        <a href="{% url 'my_bookings' %}" class="btn btn-primary me-2">
+            View My Bookings
+        </a>
+
+        <a href="{% url 'restaurant_list' %}" class="btn btn-outline-secondary">
+            Book Another Table
+        </a>
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

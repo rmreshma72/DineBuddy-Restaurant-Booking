@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Book Your Table at {{ restaurant.name }}</h2>
+    <form method="POST">
+    {% csrf_token %}
+
+<!-- Select Date -->
+
+    <div class="mb-3">
+        <label class="form-label">Select Date</label>
+        <input type="date" name="date" id= 'bookingDate' class="form-control" required>
+    </div>
+
+<!-- Time Slots -->
+
+    <h5 class="mt-4">Select Time</h5>
+    <div class="d-flex flex-wrap gap-2 mt-2">
+        {% for slot in timeslots %}
+        <label class="slot-btn">
+            <input type="radio" name="timeslot" value="{{ slot.id }}" required>
+            <span>{{ slot.time|time:"g:i A" }}</span>
+        </label>
+        {% empty %}
+        <p>No slots available</p>
+        {% endfor %}
+    </div>
+
+<!-- Guests -->
+
+<div class="mt-4">
+<label class="form-label">Number of Guests</label>
+<input type="number" name="guests" class="form-control" min="1" required>
+</div>
+
+<!-- Submit -->
+
+<button class="btn btn-danger mt-4 w-100">
+Confirm Booking
+</button>
+
+</form>
+
+</div>
+
+<style>
+
+    .slot-btn{
+        display:inline-block;
+        border:1px solid #28a745;
+        padding:8px 15px;
+        border-radius:6px;
+        cursor:pointer;
+        margin:5px;
+        }
+
+    .slot-btn input{
+         display:none;
+        }
+
+    .slot-btn span{
+        font-size:14px;
+}
+
+    .slot-btn input:checked + span{
+        background:#28a745;
+        color:white;
+        padding:8px 15px;
+        border-radius:6px;
+        }
+
+</style>
+<script>
+
+    let today = new Date().toISOString().split('T')[0];
+    document.getElementById("bookingDate").setAttribute("min", today);
+
+</script>
+{% endblock %}
+
+
+

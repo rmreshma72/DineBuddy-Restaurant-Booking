@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<h3>Add Menu Item</h3>
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<div class="mb-3">
+<label>Select Restaurant</label>
+<select name="restaurant" class="form-control">
+
+{% for r in restaurants %}
+
+<option value="{{ r.id }}">{{ r.name }}</option>
+{% endfor %}
+
+</select>
+</div>
+
+<div class="mb-3">
+<label>Item Name</label>
+{{form.name}}
+</div>
+
+<div class="mb-3">
+<label>Category</label>
+{{form.category}}
+</div>
+
+<div class="mb-3">
+<label>Description</label>
+{{form.description}}
+</div>
+
+<div class="mb-3">
+<label>Price</label>
+{{form.price}}
+</div>
+
+<div class="mb-3">
+    <label>Food Image</label>
+    {{form.image}}
+</div>
+
+
+<button class="btn btn-success">Add Menu</button>
+
+</form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+.hero-section {
+    height: 350px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+}
+
+.hero-section h1 {
+    font-size: 48px;
+}
+
+.filter-box {
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+}
+
+.restaurant-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-8px);
+}
+
+.restaurant-card img {
+    height: 200px;
+    object-fit: cover;
+}

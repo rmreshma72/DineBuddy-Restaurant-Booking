@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4">Edit Restaurant</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+    <div class="mb-3">
+        <label>Restaurant Name</label>
+        {{ form.name }}
+    </div>
+
+    <div class="mb-3">
+        <label>Location</label>
+        {{ form.location }}
+    </div>
+
+    <div class="mb-3">
+        <label>Cuisine</label>
+        {{ form.cuisine }}
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        {{ form.description }}
+    </div>
+
+    <div class="mb-3">
+        <label>Opening Time</label>
+        {{ form.opening_time }}
+    </div>
+
+    <div class="mb-3">
+        <label>Closing Time</label>
+        {{ form.closing_time }}
+    </div>
+
+    <div class="mb-3">
+        <label>Restaurant Image</label>
+        {{ form.image }}
+    </div>
+
+    <button type="submit" class="btn btn-success">
+    Update Restaurant
+    </button>
+
+<a href="{% url 'owner_dashboard' %}" class="btn btn-secondary">
+Cancel
+</a>
+
+</form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h3>Generate Time Slots</h3>
+
+<form method="POST">
+{% csrf_token %}
+
+<label>Restaurant</label> <select name="restaurant" class="form-control">
+{% for r in restaurants %}
+
+<option value="{{r.id}}">{{r.name}}</option>
+{% endfor %}
+</select>
+
+<br>
+
+<label>Meal Type</label> <select name="meal_type" class="form-control">
+
+<option>Breakfast</option>
+<option>Lunch</option>
+<option>Dinner</option>
+</select>
+
+<br>
+
+<label>Start Time</label> <input type="time" name="start_time" class="form-control">
+
+<br>
+
+<label>End Time</label> <input type="time" name="end_time" class="form-control">
+
+<br>
+
+<label>Interval (minutes)</label> <select name="interval" class="form-control">
+
+<option value="15">15 Minutes</option>
+<option value="30">30 Minutes</option>
+</select>
+
+<br>
+
+<button class="btn btn-success">
+Generate Slots
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

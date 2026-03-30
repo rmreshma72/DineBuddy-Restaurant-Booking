@@ -1,0 +1,48 @@
+header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+body {
+    padding-top: 80px;
+    background-color: #f8f9fa;
+}
+
+.custom-navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,1);
+    background-color:#f34554;
+}
+
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-size: 26px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    transition: 0.3s;
+}
+
+footer {
+    margin-top: 80px;
+}
+.search-bar{
+    width:100%;
+}
+
+.search-bar input{
+    border-radius:8px;
+}
+
+.navbar{
+    padding:15px;
+}

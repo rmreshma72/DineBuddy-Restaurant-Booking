@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h3>Manage Offers</h3>
+    <div class="row">
+        {% for restaurant in restaurants %}
+        <div class="col-md-4 mb-3">
+            <div class="card p-3">
+                <h5>{{ restaurant.name }}</h5>
+                <a href="{% url 'manage_offers' restaurant.id %}" class="btn btn-primary">
+                    Manage Offers
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

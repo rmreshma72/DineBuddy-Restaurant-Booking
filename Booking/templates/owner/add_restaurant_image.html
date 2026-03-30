@@ -1,0 +1,15 @@
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<label>Select Restaurant</label>
+<select name="restaurant">
+{% for r in restaurants %}
+<option value="{{ r.id }}">{{ r.name }}</option>
+{% endfor %}
+</select>
+
+<input type="file" name="image">
+
+<button type="submit">Upload</button>
+
+</form>

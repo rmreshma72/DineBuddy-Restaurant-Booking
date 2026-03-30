@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<h3>Add Time Slot</h3>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="mb-3">
+<label>Select Restaurant</label>
+<select name="restaurant" class="form-control">
+
+{% for r in restaurants %}
+
+<option value="{{ r.id }}">{{ r.name }}</option>
+{% endfor %}
+
+</select>
+</div>
+
+<div class="mb-3">
+<label>Meal Type</label>
+<select name="meal_type" class="form-control">
+<option value="Breakfast">Breakfast</option>
+<option value="Lunch">Lunch</option>
+<option value="Dinner">Dinner</option>
+</select>
+</div>
+
+<div class="mb-3">
+<label>Time</label>
+<input type="time" name="slot" class="form-control">
+</div>
+
+<button class="btn btn-success">Add Time Slot</button>
+
+</form>
+
+</div>
+
+{% endblock %}

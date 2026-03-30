@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<h2 class="mb-4">My Restaurants</h2>
+
+<a href="{% url 'add_restaurant' %}" class="btn btn-success mb-3">
+Add New Restaurant
+</a>
+
+<div class="row">
+
+{% for restaurant in restaurants %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow">
+
+{% if restaurant.image %} <img src="{{ restaurant.image.url }}" class="card-img-top" height="200">
+{% endif %}
+
+
+<div class="card-body">
+
+<h5 class="card-title">{{ restaurant.name }}</h5>
+
+<p class="card-text">
+<strong>Location:</strong> {{ restaurant.location }} <br>
+<strong>Cuisine:</strong> {{ restaurant.cuisine }}
+</p>
+
+<a href="{% url 'edit_restaurant' restaurant.id %}" 
+class="btn btn-warning btn-sm">
+Edit </a>
+
+<a href="{% url 'delete_restaurant' restaurant.id %}" 
+class="btn btn-danger btn-sm">
+Delete </a>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<p>No restaurants added yet.</p>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+.time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.slot-btn {
+    padding: 10px 18px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.slot-btn:hover {
+    background: #ffecec;
+    border-color: #ff4d4d;
+}
+
+.slot-btn.active {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}

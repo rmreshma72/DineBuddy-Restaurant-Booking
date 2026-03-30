@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row">
+<!-- Restaurant Images -->
+        <div class="col-md-6">
+<!-- Main Image -->
+            <div class="mb-3">
+                {% if images %}
+                <img id="mainImage" src="{{ images.0.image.url }}" 
+                class="img-fluid rounded shadow"
+                style="height:400px; width:100%; object-fit:cover;">
+                {% endif %}
+            </div>
+<!-- Thumbnails -->
+            <div class="d-flex flex-wrap gap-2">
+                {% for img in images %}
+                    <img src="{{ img.image.url }}"
+                        class="thumbnail-img"
+                        onclick="changeImage(this)"
+                        style="width:90px;height:70px;object-fit:cover;cursor:pointer;border-radius:6px;">
+                {% endfor %}
+            </div>
+        </div>
+<!-- Restaurant Details -->
+        <div class="col-md-6">
+            <h2>{{ restaurant.name }}</h2>
+            <p class="text-muted">
+                📍 {{ restaurant.location }}
+            </p>
+            <p>
+                <strong>Cuisine:</strong> {{ restaurant.cuisine }}
+            </p>
+            <p>
+                {{ restaurant.description }}
+            </p>
+            <hr>
+            <h5>Reserve a Table</h5>
+            <a href="{% url 'book_table' restaurant.id %}" class="btn btn-danger">
+                Book Table
+            </a>
+
+            <button class="btn btn-outline-dark ms-2" onclick="toggleMenu()">
+            View Menu 🍽️
+            </button>
+        </div>
+
+    </div>
+<!-- Menu Section -->
+    <div id="menuSection" style="display:none;" class="mt-4">
+        <h4 class="mt-4">Menu 🍽</h4>
+        <div class="mb-3">
+            <button class="btn btn-outline-dark category-btn" data-category="all">All</button>
+            <button class="btn btn-outline-dark category-btn" data-category="Breakfast">Breakfast</button>
+            <button class="btn btn-outline-dark category-btn" data-category="Lunch">Lunch</button>
+            <button class="btn btn-outline-dark category-btn" data-category="Dinner">Dinner</button>
+            <button class="btn btn-outline-dark category-btn" data-category="Snacks">Snacks</button>
+            <button class="btn btn-outline-dark category-btn" data-category="Drinks">Drinks</button>
+            <button class="btn btn-outline-dark category-btn" data-category="Desserts">Desserts</button>
+        </div>
+        <div class="row">
+            {% for item in menu_items %}
+            <div class="col-md-3 mb-4 menu-item" data-category="{{ item.category }}">
+                <div class="card shadow-sm h-100">
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" class="card-img-top" style="height:180px;object-fit:cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5>{{ item.name }}</h5>
+                        <p class="text-muted">{{ item.category }}</p>
+                        <p>{{ item.description }}</p>
+                        <strong>₹ {{ item.price }}</strong>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+<!-- Offers -->
+    <h4 class="mt-4">Dining Offers</h4>
+    <p class="text-muted">Tap on any offer to know more</p>
+    <div class="row">
+        {% for offer in offers %}
+        <div class="col-md-4 mb-3">
+            <div class="offer-card p-3">
+                <h6 class="text-primary">{{ offer.title }}</h6>
+                <h5>{{ offer.discount }}</h5>
+                <p class="text-muted">{{ offer.description }}</p>
+                <small>
+                    Valid from {{ offer.valid_from }} to {{ offer.valid_to }}
+                </small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+<!-- Customer Reviews -->
+        <hr>
+        <h4>Customer Reviews</h4>
+        {% for review in reviews %}
+            <div class="card p-3 mb-2 shadow-sm">
+                <strong>{{ review.user.username }}</strong>
+                <p>⭐ {{ review.rating }} / 5</p>
+                <p>{{ review.comment }}</p>
+            </div>
+            {% empty %}
+            <p>No reviews yet.</p>
+        {% endfor %}
+    
+        <hr>
+        <h5>Write a Review</h5>
+        {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'add_review' restaurant.id %}">
+            {% csrf_token %}    
+            <label>Rating</label>
+            <div class="star-rating">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <input type="hidden" name="rating" id="rating-value">
+            <br>
+            <label>Comment</label>
+            <textarea name="comment" class="form-control"></textarea>
+            <br>
+            <button class="btn btn-primary">Submit Review</button>
+            </form>
+        {% else %}
+            <p>PLease login to write a review </p>
+        {% endif %}
+</div>
+
+<script>
+    <!-- Rating -->
+    const stars = document.querySelectorAll(".star");
+    const ratingInput = document.getElementById("rating-value");
+    stars.forEach(star =>{
+        star.addEventListener("click",function(){
+            let rating = this.getAttribute("data-value");
+            ratingInput.value = rating
+            stars.forEach(s => s.classList.remove("selected"));
+            for (let i =0; i<rating; i++){
+                stars[i].classList.add("selected")
+            }
+        });
+    });
+
+    
+    document.addEventListener("DOMContentLoaded", function(){
+    const buttons = document.querySelectorAll(".category-btn");
+    const items = document.querySelectorAll(".menu-item");
+    buttons.forEach(button => {
+        button.addEventListener("click", function(){
+        let category = this.getAttribute("data-category");
+        items.forEach(item => {
+            if(category === "all" || item.dataset.category === category){
+             item.style.display = "block";
+            }else{
+                item.style.display = "none"; }
+            });
+        });
+    });
+});
+
+
+
+    function toggleMenu(){
+        let menu = document.getElementById("menuSection");
+        if(menu.style.display === "none"){
+            menu.style.display = "block";
+        }
+        else{
+            menu.style.display = "none";
+        }
+    }
+    function changeImage(element){
+        let mainImage = document.getElementById("mainImage");
+        mainImage.src = element.src;
+    }
+
+</script>
+
+
+{% endblock %}

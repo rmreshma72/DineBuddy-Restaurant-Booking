@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h3>Add Offer - {{ restaurant.name }}</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label>Offer Title</label>
+            <input type="text" name="title" class="form-control">
+        </div>
+        
+        <div class="mb-3">
+            <label>Discount</label>
+            <input type="text" name="discount" class="form-control">
+        </div>
+        
+        <div class="mb-3">
+            <label>Description</label>
+            <textarea name="description" class="form-control"></textarea>
+        </div>
+        
+        <div class="mb-3">
+            <label>Valid From</label>
+            <input type="time" name="valid_from" class="form-control">
+        </div>
+        
+        <div class="mb-3">
+            <label>Valid To</label>
+            <input type="time" name="valid_to" class="form-control">
+        </div>
+        
+        <button class="btn btn-success">Add Offer</button>
+    </form>
+</div>
+
+{% endblock %}

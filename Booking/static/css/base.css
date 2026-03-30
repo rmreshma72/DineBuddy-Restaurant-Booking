@@ -1,0 +1,109 @@
+/* Sticky Header */
+header{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ff4d4d;
+    padding: 12px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Navbar links */
+.nav-links a{
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Hover animation */
+.nav-links a:hover{
+    color: #ffd700;
+    transform: translateY(-2px);
+}
+
+/* Search bar animation */
+.search-box input{
+    border-radius: 20px;
+    border: none;
+    padding: 8px 15px;
+    width: 180px;
+    transition: all 0.3s ease;
+}
+
+/* Expand search on focus */
+.search-box input:focus{
+    width: 240px;
+    outline: none;
+}
+
+/* Search button */
+.search-box button{
+    border-radius: 20px;
+    padding: 8px 15px;
+    border: none;
+    background: #ffc107;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.search-box button:hover{
+    background: #ffb300;
+}
+
+body{
+    padding-top: 80px;
+}
+
+.thumbnail-img{
+border:2px solid transparent;
+transition:0.3s;
+}
+
+.thumbnail-img:hover{
+border:2px solid #dc3545;
+transform:scale(1.05);
+}
+
+.star-rating{
+font-size:30px;
+color:#ccc;
+cursor:pointer;
+}
+
+.star{
+margin-right:5px;
+}
+
+.star.selected{
+color:#ffc107;
+}
+
+.offer-card{
+
+background:#f8f9fa;
+border-radius:10px;
+border:1px solid #eee;
+
+transition:0.3s;
+cursor:pointer;
+
+}
+
+.offer-card:hover{
+
+transform:scale(1.03);
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
+
+}
+
+.dashboard-card{
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.dashboard-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}

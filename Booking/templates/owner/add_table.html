@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<h3>Add Table</h3>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="mb-3">
+
+<label>Select Restaurant</label>
+
+<select name="restaurant" class="form-control">
+
+{% for r in restaurants %}
+
+<option value="{{ r.id }}">{{ r.name }}</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="mb-3">
+
+<label>Table Number</label>
+
+<input type="number" name="number" class="form-control">
+
+</div>
+
+<div class="mb-3">
+
+<label>Capacity</label>
+
+<input type="number" name="capacity" class="form-control">
+
+</div>
+
+<button class="btn btn-success">Add Table</button>
+
+</form>
+
+</div>
+
+{% endblock %}

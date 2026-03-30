@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<h3>
+    {% if query %}
+        Search Results for "{{ query }}"
+    {% else %}
+        All Restaurants
+    {% endif %}
+</h3>
+
+<div class="row">
+
+{% for restaurant in restaurants %}
+
+<div class="col-md-4 mb-4">
+<div class="card shadow">
+
+{% if restaurant.image %} 
+    <img src="{{ restaurant.image.url }}" class="card-img-top" height="200">
+{% endif %}
+
+<div class="card-body">
+
+    <h5>{{ restaurant.name }}</h5>
+
+    <p>{{ restaurant.location }} | {{ restaurant.cuisine }}</p>
+
+    <a href="{% url 'restaurant_detail' restaurant.id %}" class="btn btn-primary">
+    View Details
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<p>No restaurants found.</p>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Manage Restaurants</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>Location</th>
+                <th>Cuisine</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for restaurant in restaurants %}
+            <tr>
+                <td>{{ restaurant.name }}</td>
+                <td>{{ restaurant.owner.username }}</td>
+                <td>{{ restaurant.location }}</td>
+                <td>{{ restaurant.cuisine }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

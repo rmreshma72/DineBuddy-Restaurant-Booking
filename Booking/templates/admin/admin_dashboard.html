@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Admin Dashboard</h2>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card p-3 text-center shadow">
+                <h6>Total Users</h6>
+                <h3>{{ total_users }}</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3 text-center shadow">
+                <h6>Total Restaurants</h6>
+                <h3>{{ total_restaurants }}</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3 text-center shadow">
+                <h6>Total Bookings</h6>
+                <h3>{{ total_bookings }}</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3 text-center shadow">
+                <h6>Today's Bookings</h6>
+                <h3>{{ today_bookings }}</h3>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-5">
+    <h4>Platform Analytics</h4>
+    <canvas id="bookingChart"></canvas>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+new Chart(document.getElementById("bookingChart"), {
+
+    type: "line",
+
+    data: {
+    labels: {{ days|safe }},
+    datasets: [{
+    label: "Bookings Per Day",
+    data: {{ day_counts|safe }},
+    borderWidth: 2
+    }]
+    }
+
+});
+
+</script>
+
+{% endblock %}
